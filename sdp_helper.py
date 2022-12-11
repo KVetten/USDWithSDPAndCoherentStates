@@ -150,19 +150,36 @@ def sdp_primal_4_states(
     ) -> (float, float, float, np.array, np.array, np.array):
 
     """
-    This function does the SDP for two coherent states with arbitrary input
-    probabilites
+    This function does the SDP for four coherent states with arbitrary input
+    probabilites xi_i.
 
     Parameters
     ----------
-        alpha_1: np.array
-        alpha_2: np.array
-        xi_1: float
-            Input probability of alpha_1 with 0 <= xi_1 <= 1            
+        alpha_1 : complex
+            eigenvalue of state 1
+        alpha_2 : complex
+            eigenvalue of state 2
+        alpha_3 : complex
+            eigenvalue of state 3
+        alpha_4 : complex
+            eigenvalue of state 4
+        xi_1 : float
+            input probablity of state 1
+        xi_2 : float
+            input probablity of state 2
+        xi_3 : float
+            input probablity of state 3
+        xi_4 : float
+            input probablity of state 4
+        n : int
+            The last fock that is represented.
+        zero_operators: List[str] = []
+            Operators which are forced to be zero matrices. Enter strings as
+            "Pi_1" for example.
 
     Returns
     -------
-        p_corr: floal
+        p_corr: float
         Pi_1: np.array
         Pi_2: np.array
         Pi_3: np.array
@@ -258,27 +275,44 @@ def sdp_primal_4_states_mixed(
         xi_3: float,
         xi_4: float,
         n : int,
-        zero_operators: List[str] = [],
-    ) -> (float, float, float, np.array, np.array, np.array):
+    ) -> (float, np.array, np.array):
 
     """
-    This function does the SDP for two coherent states with arbitrary input
-    probabilites
+    This function does the SDP for four coherent states. The first state
+    corresponding to variable alpha_1 (which is it's eigenvalue) and xi_1
+    (it's input probability) is a coherent states. Whereas the remaing three 
+    states are treated as one mixed state, which consists of three coherent
+    states with eigenvalues alpha_i.
 
     Parameters
     ----------
-        alpha_1: np.array
-        alpha_2: np.array
-        xi_1: float
-            Input probability of alpha_1 with 0 <= xi_1 <= 1            
+        alpha_1 : complex
+            eigenvalue of state 1
+        alpha_2 : complex
+            eigenvalue of state 2
+        alpha_3 : complex
+            eigenvalue of state 3
+        alpha_4 : complex
+            eigenvalue of state 4
+        xi_1 : float
+            input probablity of state 1
+        xi_2 : float
+            input probablity of state 2
+        xi_3 : float
+            input probablity of state 3
+        xi_4 : float
+            input probablity of state 4
+        n : int
+            The last fock that is represented.
+        zero_operators: List[str] = []
+            Operators which are forced to be zero matrices. Enter strings as
+            "Pi_1" for example.         
 
     Returns
     -------
-        p_corr: floal
-        Pi_1: np.array
-        Pi_2: np.array
-        Pi_3: np.array
-        Pi_4: np.array
+        p_corr : float
+        Pi_1 : np.array
+        Pi_n : np.array
     """
 
     vec_state_1 = coh_state_vector(alpha_1, n)
